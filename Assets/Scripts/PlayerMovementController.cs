@@ -36,20 +36,13 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, colliderRadius * 0.9f, 0);
 
         //check player is grounded
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
 
         isGrounded = false;
         if (colliders.Length > 0)
         {
-            foreach (Collider2D c in colliders)
-            {
-                if (c != bc)
-                {
-                    isGrounded = true;
-                    break;
-                }
-            }
+            isGrounded = true;
         }
 
         Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
