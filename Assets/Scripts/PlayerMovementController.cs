@@ -7,6 +7,7 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public BoxCollider2D bc;
+    public EdgeCollider2D ec;
     public float speed = 10.0f;
     public float maxJumpHeight = 10.0f;
 
@@ -30,17 +31,18 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        // work out the player location/if they're grounded
+        // work out the player location/if they're grounded (not used atm)
         Bounds colliderBounds = bc.bounds;
         float colliderRadius = bc.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
         Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, colliderRadius * 0.9f, 0);
 
-        //check player is grounded
+        //check player is grounded (not used atm)
         Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
 
         isGrounded = false;
-        if (colliders.Length > 0)
+        //if (colliders.Length > 0)
+        if (ec.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             isGrounded = true;
         }
