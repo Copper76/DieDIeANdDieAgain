@@ -8,11 +8,14 @@ public class PlayerMovementController : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D bc;
     public EdgeCollider2D ec;
-    public float speed = 10.0f;
-    public float maxJumpHeight = 10.0f;
+    public GameObject corpse;
+    public GameObject environment;
+    public float speed;
+    public float maxJumpHeight;
+    public Vector3 respawnPoint;
 
-    private float horizontal = 0.0f;
-    private float vertical = 0.0f;
+    private float horizontal;
+    private float vertical;
 
     private bool isGrounded = false;
     // Start is called before the first frame update
@@ -20,6 +23,19 @@ public class PlayerMovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        speed = 10.0f;
+        maxJumpHeight = 10.0f;
+        horizontal = 0.0f;
+        vertical = 0.0f;
+    }
+
+    //moves the player to a designated respawn point and generate a corpse where he died
+    void respawn()
+    {
+        GameObject deadPlayer = Instantiate(corpse, this.transform.position, Quaternion.identity);
+        deadPlayer.transform.parent = environment.transform;
+        this.transform.Translate(respawnPoint-this.transform.position);
+        this.rb.velocity = new Vector2(0f,0f);
     }
 
     // Update is called once per frame
@@ -53,6 +69,11 @@ public class PlayerMovementController : MonoBehaviour
         {
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
+        }
+
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame)
+        {
+            respawn();
         }
 
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
