@@ -13,11 +13,12 @@ public class PlayerMovementController : MonoBehaviour
     public float speed;
     public float maxJumpHeight;
     public Vector3 respawnPoint;
+    public int lives;
 
     private float horizontal;
     private float vertical;
 
-    private bool isGrounded = false;
+    private bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,15 +28,36 @@ public class PlayerMovementController : MonoBehaviour
         maxJumpHeight = 10.0f;
         horizontal = 0.0f;
         vertical = 0.0f;
+        isGrounded = false;
     }
 
-    //moves the player to a designated respawn point and generate a corpse where he died
-    void respawn()
+    //generate a corpse where he died
+    void dummy()
     {
         GameObject deadPlayer = Instantiate(corpse, this.transform.position, Quaternion.identity);
         deadPlayer.transform.parent = environment.transform;
-        this.transform.Translate(respawnPoint-this.transform.position);
-        this.rb.velocity = new Vector2(0f,0f);
+    }
+
+    //moves the player to a designated respawn point
+    void die()
+    {
+        // if (lives > 0)
+        // {
+            this.transform.Translate(respawnPoint-this.transform.position);
+            this.rb.velocity = new Vector2(0f,0f);
+            // lives -= 1;
+        // }
+        // else
+        // {
+        //     //game lost code
+        // }
+    }
+
+    //put a dummy then die, applicable to anything other than falling
+    void respawn()
+    {
+        dummy();
+        die();
     }
 
     // Update is called once per frame
@@ -56,19 +78,25 @@ public class PlayerMovementController : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
 
-        isGrounded = false;
-        //if (colliders.Length > 0)
+        //uncomment next line for previous result
+        //isGrounded = false; 
         if (ec.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             isGrounded = true;
         }
 
-        Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
+        if (ec.IsTouchingLayers(LayerMask.GetMask("Death")))
+        {
+            die();
+        }
+
+        //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
+            isGrounded = false;
         }
 
         if (Keyboard.current.ctrlKey.wasPressedThisFrame)

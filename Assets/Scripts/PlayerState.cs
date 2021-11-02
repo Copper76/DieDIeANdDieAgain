@@ -22,6 +22,6 @@ public class PlayerState : MonoBehaviour
     {
         playerGridPosition = gridLayout.WorldToCell(transform.position);
         
-        Debug.Log(string.Format("Tick {0}: player at grid pos {1} and real world pos {2}.", Time.frameCount, playerGridPosition.ToString(), transform.position.ToString()));
+        // Debug.Log(string.Format("Tick {0}: player at grid pos {1} and real world pos {2}.", Time.frameCount, playerGridPosition.ToString(), transform.position.ToString()));
     }
 }
