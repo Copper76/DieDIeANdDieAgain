@@ -19,6 +19,7 @@ public class PlayerMovementController : MonoBehaviour
     private float vertical;
 
     private bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +44,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         // if (lives > 0)
         // {
-            this.transform.Translate(respawnPoint-this.transform.position);
+            this.transform.Translate(respawnPoint-this.transform.position+new Vector3(0,gameObject.GetComponent<SpriteRenderer>().bounds.size.y));
             this.rb.velocity = new Vector2(0f,0f);
             // lives -= 1;
         // }
@@ -63,7 +64,12 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /* just some debug logging
+        if (rb.velocity.sqrMagnitude <= 0.05 && Keyboard.current.IsPressed())
+        {
+            Debug.LogError(string.Format("Frame {0} : Stuck? vel {1}, drag = {2}, isGrounded = {3}, position = {4}", Time.frameCount, rb.velocity.ToString(), rb.drag, ec.IsTouchingLayers(LayerMask.GetMask("Ground")), gameObject.transform.position.ToString()));
+        }
+        */
     }
 
     void FixedUpdate()
@@ -80,12 +86,12 @@ public class PlayerMovementController : MonoBehaviour
 
         //uncomment next line for previous result
         //isGrounded = false; 
-        if (ec.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             isGrounded = true;
         }
 
-        if (ec.IsTouchingLayers(LayerMask.GetMask("Death")))
+        if (bc.IsTouchingLayers(LayerMask.GetMask("Death")))
         {
             die();
         }
