@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
@@ -15,23 +16,28 @@ public class PlayerMovementController : MonoBehaviour
     public float maxJumpHeight;
     public Vector3 respawnPoint;
     public int lives;
+    public Text score;
 
     private float horizontal;
     private float vertical;
+    private int scoreNum;
 
-    private bool isGrounded;
+    public bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        ec = GetComponent<EdgeCollider2D>();
         sr = GetComponent<SpriteRenderer>();
         speed = 10.0f;
         maxJumpHeight = 10.0f;
         horizontal = 0.0f;
         vertical = 0.0f;
         isGrounded = false;
+        score.text = "Score:0";
+        scoreNum = 0;
     }
 
     //generate a corpse where he died
@@ -83,6 +89,33 @@ public class PlayerMovementController : MonoBehaviour
         die();
     }
 
+    //collects the collectibles with this
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Collectible")
+        { 
+            Destroy(other.gameObject);
+            scoreNum += 100;
+            score.text = "Score:"+scoreNum;
+        }
+    }
+
+    //used this for isgorunded
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("entered Collision");
+        Debug.Log(other.otherCollider);
+        if (other.gameObject.layer == 3 && other.otherCollider == bc)
+        {
+            isGrounded = true;
+        }
+
+        if (other.gameObject.layer == 6)
+        {
+            die();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -105,18 +138,18 @@ public class PlayerMovementController : MonoBehaviour
         //check player is grounded (not used atm)
         Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
-
-        //uncomment next line for previous result
-        //isGrounded = false; 
+        /**
         if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
+            Debug.Log("touching");
             isGrounded = true;
         }
-
+        
         if (bc.IsTouchingLayers(LayerMask.GetMask("Death")))
         {
             die();
         }
+        **/
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
