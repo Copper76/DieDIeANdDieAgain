@@ -8,6 +8,7 @@ public class PlayerMovementController : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D bc;
     public EdgeCollider2D ec;
+    public SpriteRenderer sr;
     public GameObject corpse;
     public GameObject environment;
     public float speed;
@@ -25,6 +26,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
         speed = 10.0f;
         maxJumpHeight = 10.0f;
         horizontal = 0.0f;
@@ -44,7 +46,27 @@ public class PlayerMovementController : MonoBehaviour
     {
         // if (lives > 0)
         // {
-            this.transform.Translate(respawnPoint-this.transform.position+new Vector3(0,gameObject.GetComponent<SpriteRenderer>().bounds.size.y));
+        var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
+        /*
+        
+        bool isCurrentlyColliding = false;
+        do
+        {
+            
+            List<Collider2D> colliders = new List<Collider2D>();
+            rb.GetAttachedColliders(colliders);
+            foreach (Collider2D collider in colliders)
+            {
+                Vector3 closest = collider.ClosestPoint(trialRespawnPos);
+                if (closest == trialRespawnPos) // the closest point is equal to the point within the bounds, if already inside
+                {
+                    isCurrentlyColliding = true;
+                    trialRespawnPos.y = Mathf.Max(closest.y + sr.bounds.size.y, trialRespawnPos.y); // set it to the highest point not currently overlapping a collider
+                }
+            }
+        }while(!isCurrentlyColliding);
+        */
+            this.transform.Translate(trialRespawnPos);
             this.rb.velocity = new Vector2(0f,0f);
             // lives -= 1;
         // }
