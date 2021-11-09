@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectibleMovement : MonoBehaviour
 {
     public int life;
+
     private float timer;
     private Rigidbody2D rb;
 

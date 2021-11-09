@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +8,6 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public BoxCollider2D bc;
-    public EdgeCollider2D ec;
     public SpriteRenderer sr;
     public GameObject corpse;
     public GameObject environment;
@@ -17,6 +16,8 @@ public class PlayerMovementController : MonoBehaviour
     public Vector3 respawnPoint;
     public int lives;
     public Text score;
+    public Text life;
+    public GameObject collectibles;
 
     private float horizontal;
     private float vertical;
@@ -29,7 +30,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
-        ec = GetComponent<EdgeCollider2D>();
         sr = GetComponent<SpriteRenderer>();
         speed = 10.0f;
         maxJumpHeight = 10.0f;
@@ -37,7 +37,34 @@ public class PlayerMovementController : MonoBehaviour
         vertical = 0.0f;
         isGrounded = false;
         score.text = "Score:0";
+        updateLife();
+        updateCollectibles();
         scoreNum = 0;
+    }
+
+    void updateLife()
+    {
+        string text = "Life=";
+        for (int i = 0; i < lives; i++)
+        {
+            text += "\u2610";//It's a square!!!
+        }
+        life.text = text;
+    }
+
+    void updateCollectibles()
+    {
+        foreach (Transform t in collectibles.transform)
+        {
+            if (t.gameObject.GetComponent<CollectibleMovement>().life == lives)
+            {
+                t.gameObject.SetActive(true);
+            }
+            else
+            {
+                t.gameObject.SetActive(false);
+            }
+        }
     }
 
     //generate a corpse where he died
@@ -74,7 +101,9 @@ public class PlayerMovementController : MonoBehaviour
         */
             this.transform.Translate(trialRespawnPos);
             this.rb.velocity = new Vector2(0f,0f);
-            // lives -= 1;
+            lives -= 1;
+            updateLife();
+            updateCollectibles();
         // }
         // else
         // {
@@ -98,6 +127,16 @@ public class PlayerMovementController : MonoBehaviour
             scoreNum += 100;
             score.text = "Score:"+scoreNum;
         }
+
+        if (other.gameObject.layer == 6)
+        {
+            die();
+        }
+
+        if (other.gameObject.tag == "Exit")
+        {
+            //victory code
+        }
     }
 
     //used this for isgorunded
@@ -109,11 +148,6 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.layer == 3 && other.otherCollider == ec)
         {
             isGrounded = true;
-        }
-
-        if (other.gameObject.layer == 6)
-        {
-            die();
         }
     }
     **/
@@ -144,13 +178,7 @@ public class PlayerMovementController : MonoBehaviour
             Debug.Log("touching");
             isGrounded = true;
         }
-        
-        /**
-        if (bc.IsTouchingLayers(LayerMask.GetMask("Death")))
-        {
-            die();
-        }
-        **/
+
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
