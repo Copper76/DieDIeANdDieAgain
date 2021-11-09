@@ -189,7 +189,7 @@ public class PlayerMovementController : MonoBehaviour
             isGrounded = false;
         }
 
-        if (Keyboard.current.ctrlKey.wasPressedThisFrame)
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0)
         {
             respawn();
         }
