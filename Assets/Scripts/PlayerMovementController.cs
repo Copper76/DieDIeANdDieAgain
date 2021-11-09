@@ -101,11 +101,12 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     //used this for isgorunded
+    /**
     void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("entered Collision");
         Debug.Log(other.otherCollider);
-        if (other.gameObject.layer == 3 && other.otherCollider == bc)
+        if (other.gameObject.layer == 3 && other.otherCollider == ec)
         {
             isGrounded = true;
         }
@@ -115,7 +116,7 @@ public class PlayerMovementController : MonoBehaviour
             die();
         }
     }
-
+    **/
     // Update is called once per frame
     void Update()
     {
@@ -132,25 +133,24 @@ public class PlayerMovementController : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         // work out the player location/if they're grounded (not used atm)
         Bounds colliderBounds = bc.bounds;
-        float colliderRadius = bc.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
-        Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, colliderRadius * 0.9f, 0);
+        Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, 0f, 0f);
 
         //check player is grounded (not used atm)
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheckPos, bc.size, 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
+        Collider2D colliders = Physics2D.OverlapBox(groundCheckPos, new Vector3(colliderBounds.size.x*0.9f,0.1f,0f), 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
-        /**
-        if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        //if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (colliders != null)
         {
             Debug.Log("touching");
             isGrounded = true;
         }
         
+        /**
         if (bc.IsTouchingLayers(LayerMask.GetMask("Death")))
         {
             die();
         }
         **/
-
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
