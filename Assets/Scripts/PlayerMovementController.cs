@@ -133,8 +133,9 @@ public class PlayerMovementController : MonoBehaviour
             die();
         }
 
-        if (other.gameObject.tag == "Exit")
+        if (other.gameObject.tag == "Finish")
         {
+            Debug.Log("you've reached the finish line");
             //victory code
         }
     }
