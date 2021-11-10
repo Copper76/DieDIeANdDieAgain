@@ -18,6 +18,9 @@ public class PlayerMovementController : MonoBehaviour
     public Text score;
     public Text life;
     public GameObject collectibles;
+    public GameObject leftlight;
+    public GameObject rightlight;
+    public GameObject bottomlight;
 
     private float horizontal;
     private float vertical;
@@ -56,13 +59,9 @@ public class PlayerMovementController : MonoBehaviour
     {
         foreach (Transform t in collectibles.transform)
         {
-            if (t.gameObject.GetComponent<CollectibleMovement>().life == lives)
+            if (t.gameObject.GetComponent<CollectibleMovement>().life >= lives)
             {
                 t.gameObject.SetActive(true);
-            }
-            else
-            {
-                t.gameObject.SetActive(false);
             }
         }
     }
@@ -166,7 +165,22 @@ public class PlayerMovementController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        // work out the player location/if they're grounded (not used atm)
+        if (rb.velocity.x > 0)
+        {
+            leftlight.SetActive(false);
+            rightlight.SetActive(true);
+        }
+        else if (rb.velocity.x < 0)
+        {
+            leftlight.SetActive(true);
+            rightlight.SetActive(false);
+        }
+        else
+        {
+            leftlight.SetActive(false);
+            rightlight.SetActive(false);
+        }
+        // work out the player location/if they're grounded
         Bounds colliderBounds = bc.bounds;
         Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, 0f, 0f);
 
@@ -178,6 +192,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             Debug.Log("touching");
             isGrounded = true;
+            bottomlight.SetActive(false);
         }
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
@@ -187,6 +202,7 @@ public class PlayerMovementController : MonoBehaviour
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
+            bottomlight.SetActive(true);
         }
 
         if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0)
