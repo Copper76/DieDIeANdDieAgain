@@ -1,5 +1,98 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1165062659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1165062660}
+  - component: {fileID: 1165062661}
+  m_Layer: 0
+  m_Name: bottomrightlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1165062660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165062659}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.6, y: -0.5, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5565483698334585385}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!108 &1165062661
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165062659}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.7490196, g: 0.30588236, b: 1, a: 1}
+  m_Intensity: 4
+  m_Range: 3
+  m_SpotAngle: 80
+  m_InnerSpotAngle: 8
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 2800000, guid: 69680b688d11eb9d30009b3b4241aa39, type: 3}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 9
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &5565483698005409758
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +104,7 @@ GameObject:
   - component: {fileID: 5565483698005409757}
   - component: {fileID: 5565483698005409756}
   m_Layer: 0
-  m_Name: bottomlight
+  m_Name: bottomleftlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5565483698005409758}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.5, z: -1}
+  m_LocalPosition: {x: -0.6, y: -0.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5565483698334585385}
@@ -44,7 +137,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.7490196, g: 0.30588236, b: 1, a: 1}
   m_Intensity: 4
-  m_Range: 10
+  m_Range: 3
   m_SpotAngle: 80
   m_InnerSpotAngle: 8
   m_CookieSize: 10
@@ -104,7 +197,7 @@ GameObject:
   - component: {fileID: 5565483698227787731}
   - component: {fileID: 5565483698227787730}
   m_Layer: 0
-  m_Name: leftlight
+  m_Name: leftuplight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5565483698227787740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.5, z: -1}
+  m_LocalPosition: {x: -0.6, y: 0.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5565483698334585385}
@@ -137,7 +230,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.7490196, g: 0.30588236, b: 1, a: 1}
   m_Intensity: 4
-  m_Range: 10
+  m_Range: 3
   m_SpotAngle: 80
   m_InnerSpotAngle: 8
   m_CookieSize: 10
@@ -201,6 +294,7 @@ GameObject:
   - component: {fileID: 5565483698334585384}
   - component: {fileID: 5565483698334585391}
   - component: {fileID: 5565483698334585390}
+  - component: {fileID: 948121839}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -223,6 +317,7 @@ Transform:
   - {fileID: 5565483698227787731}
   - {fileID: 5565483698776763231}
   - {fileID: 5565483698005409757}
+  - {fileID: 1165062660}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -266,7 +361,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a9b9ad5292caea340868435ad79a5cda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36a4acbf50d23b84bb891f344ca62005, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -414,7 +509,19 @@ MonoBehaviour:
     m_ActionId: e41b8a3a-a004-49bb-bf50-c1d60fd1d549
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5565483698334585391}
+        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e1be4997-42fa-4db8-838f-d586a94a7cfb
     m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
@@ -446,9 +553,17 @@ MonoBehaviour:
   score: {fileID: 0}
   life: {fileID: 0}
   collectibles: {fileID: 0}
-  leftlight: {fileID: 5565483698227787740}
-  rightlight: {fileID: 5565483698776763224}
-  bottomlight: {fileID: 5565483698005409758}
+  leftuplight: {fileID: 5565483698227787740}
+  rightuplight: {fileID: 5565483698776763224}
+  bottomleftlight: {fileID: 5565483698005409758}
+  bottomrightlight: {fileID: 1165062659}
+  audioSource: {fileID: 0}
+  sfxClips:
+  - {fileID: 8300000, guid: 4948c352312f74044a757de089c920ac, type: 3}
+  - {fileID: 8300000, guid: 8c80f269bf70709489e7e7b5cb32622c, type: 3}
+  - {fileID: 8300000, guid: a7c3018585928da4c906be55efcf3b3a, type: 3}
+  - {fileID: 8300000, guid: 478ba564f90c2614cb90debb17cffaf7, type: 3}
+  map: {fileID: 0}
   isGrounded: 0
 --- !u!114 &5565483698334585390
 MonoBehaviour:
@@ -465,6 +580,102 @@ MonoBehaviour:
   gridLayout: {fileID: 0}
   playerGridPosition: {x: 0, y: 0, z: 0}
   playerTransform: {x: 0, y: 0, z: 0}
+--- !u!82 &948121839
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565483698334585397}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a7c3018585928da4c906be55efcf3b3a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.793
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5565483698493025178
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5565483698493025176
 Transform:
   m_ObjectHideFlags: 0
@@ -569,7 +780,7 @@ GameObject:
   - component: {fileID: 5565483698776763231}
   - component: {fileID: 5565483698776763230}
   m_Layer: 0
-  m_Name: rightlight
+  m_Name: rightuplight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5565483698776763224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: -1}
+  m_LocalPosition: {x: 0.6, y: 0.5, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5565483698334585385}
@@ -602,7 +813,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.7490196, g: 0.30588236, b: 1, a: 1}
   m_Intensity: 4
-  m_Range: 10
+  m_Range: 3
   m_SpotAngle: 80
   m_InnerSpotAngle: 8
   m_CookieSize: 10

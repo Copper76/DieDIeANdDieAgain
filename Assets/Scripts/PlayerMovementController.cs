@@ -18,11 +18,13 @@ public class PlayerMovementController : MonoBehaviour
     public Text score;
     public Text life;
     public GameObject collectibles;
-    public GameObject leftlight;
-    public GameObject rightlight;
-    public GameObject bottomlight;
+    public GameObject leftuplight;
+    public GameObject rightuplight;
+    public GameObject bottomleftlight;
+    public GameObject bottomrightlight;
     public AudioSource audioSource;
     public List<AudioClip> sfxClips;
+    public GameObject map;
 
     private float horizontal;
     private float vertical;
@@ -63,7 +65,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         foreach (Transform t in collectibles.transform)
         {
-            if (t.gameObject.GetComponent<CollectibleMovement>().life >= lives)
+            if (t.gameObject.GetComponent<CollectibleMovement>().life <= lives)
             {
                 t.gameObject.SetActive(true);
             }
@@ -178,18 +180,24 @@ public class PlayerMovementController : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (rb.velocity.x > 0)
         {
-            leftlight.SetActive(false);
-            rightlight.SetActive(true);
+            leftuplight.SetActive(false);
+            bottomleftlight.SetActive(!isGrounded);
+            rightuplight.SetActive(true);
+            bottomrightlight.SetActive(true);
         }
         else if (rb.velocity.x < 0)
         {
-            leftlight.SetActive(true);
-            rightlight.SetActive(false);
+            leftuplight.SetActive(true);
+            bottomleftlight.SetActive(true);
+            rightuplight.SetActive(false);
+            bottomrightlight.SetActive(!isGrounded);
         }
         else
         {
-            leftlight.SetActive(false);
-            rightlight.SetActive(false);
+            leftuplight.SetActive(false);
+            bottomleftlight.SetActive(!isGrounded);
+            rightuplight.SetActive(false);
+            bottomrightlight.SetActive(!isGrounded);
         }
         // work out the player location/if they're grounded
         Bounds colliderBounds = bc.bounds;
@@ -203,7 +211,6 @@ public class PlayerMovementController : MonoBehaviour
         {
             Debug.Log("touching");
             isGrounded = true;
-            bottomlight.SetActive(false);
         }
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
@@ -213,12 +220,16 @@ public class PlayerMovementController : MonoBehaviour
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
-            bottomlight.SetActive(true);
         }
 
         if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0)
         {
             respawn();
+        }
+
+        if (Keyboard.current.mKey.wasPressedThisFrame && lives > 0)
+        {
+            map.SetActive(!map.activeInHierarchy);
         }
 
         // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
