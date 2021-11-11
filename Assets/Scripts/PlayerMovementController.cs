@@ -67,6 +67,10 @@ public class PlayerMovementController : MonoBehaviour
             {
                 t.gameObject.SetActive(true);
             }
+            else
+            {
+                t.gameObject.SetActive(true);
+            }
         }
     }
 
