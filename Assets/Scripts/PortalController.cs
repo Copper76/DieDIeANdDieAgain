@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour
 {
+    public AudioSource bgm;
     public string nextSceneName;
     private Scene nextScene;
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class PortalController : MonoBehaviour
     IEnumerator NextLevel()
     {
         nextScene = SceneManager.GetSceneByName(nextSceneName);
+        SceneManager.MoveGameObjectToScene(bgm.gameObject, nextScene);
         yield return SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
     }
 

@@ -21,6 +21,8 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject leftlight;
     public GameObject rightlight;
     public GameObject bottomlight;
+    public AudioSource audioSource;
+    public List<AudioClip> sfxClips;
 
     private float horizontal;
     private float vertical;
@@ -43,6 +45,8 @@ public class PlayerMovementController : MonoBehaviour
         updateLife();
         updateCollectibles();
         scoreNum = 0;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void updateLife()
@@ -76,6 +80,7 @@ public class PlayerMovementController : MonoBehaviour
     //moves the player to a designated respawn point
     void die()
     {
+        audioSource.PlayOneShot(sfxClips[0]);
         // if (lives > 0)
         // {
         var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
@@ -115,6 +120,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         dummy();
         die();
+        audioSource.PlayOneShot(sfxClips[3]);
     }
 
     //collects the collectibles with this
@@ -125,6 +131,7 @@ public class PlayerMovementController : MonoBehaviour
             Destroy(other.gameObject);
             scoreNum += 100;
             score.text = "Score:"+scoreNum;
+            audioSource.PlayOneShot(sfxClips[1]);
         }
 
         if (other.gameObject.layer == 6)
@@ -226,6 +233,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        audioSource.PlayOneShot(sfxClips[2]);
         Debug.Log(string.Format("Jump action called at {0}", Time.frameCount));
     }
 }
