@@ -177,7 +177,10 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (!map.activeInHierarchy) 
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
         if (rb.velocity.x > 0)
         {
             leftuplight.SetActive(false);
@@ -215,14 +218,14 @@ public class PlayerMovementController : MonoBehaviour
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy)
         {
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
         }
 
-        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0)
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy)
         {
             respawn();
         }
@@ -248,7 +251,10 @@ public class PlayerMovementController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        audioSource.PlayOneShot(sfxClips[2]);
-        Debug.Log(string.Format("Jump action called at {0}", Time.frameCount));
+        if (isGrounded && !map.activeInHierarchy)
+        {
+            audioSource.PlayOneShot(sfxClips[2]);
+            Debug.Log(string.Format("Jump action called at {0}", Time.frameCount));
+        }
     }
 }
