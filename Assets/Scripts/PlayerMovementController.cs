@@ -32,6 +32,8 @@ public class PlayerMovementController : MonoBehaviour
     private GameObject canvas;
     private Font arial;
     private bool isGrounded;
+    private int totalCollectible;
+    private RectTransform rectTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +48,8 @@ public class PlayerMovementController : MonoBehaviour
         isGrounded = false;
         score.text = "Score:0";
         updateLife();
-        updateCollectibles();
         scoreNum = 0;
+        totalCollectible = 0;
         canvas = GameObject.Find("Canvas");
 
         audioSource = GetComponent<AudioSource>();
@@ -57,6 +59,10 @@ public class PlayerMovementController : MonoBehaviour
         foreach (Transform t in collectibles.transform)
         {
             t.gameObject.SetActive(true);
+            if (t.gameObject.tag == "Collectible")
+            {
+                totalCollectible += 1;
+            }
         }
     }
 
@@ -79,6 +85,24 @@ public class PlayerMovementController : MonoBehaviour
                 Destroy(t.gameObject);
             }
         }
+    }
+
+    GameObject instantiateText(string message, int fontSize, Vector3 localPos, Vector2 size)
+    {
+        GameObject textGO = new GameObject();
+        textGO.transform.parent = canvas.transform;
+        textGO.AddComponent<Text>();
+
+        // Set Text component properties.
+        Text text = textGO.GetComponent<Text>();
+        text.text = message;
+        text.font = arial;
+        text.fontSize = fontSize;
+
+        rectTransform = text.GetComponent<RectTransform>();
+        rectTransform.localPosition = localPos;
+        rectTransform.sizeDelta = size;
+        return textGO;
     }
 
     //generate a corpse where he died
@@ -167,6 +191,16 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             Debug.Log("you've reached the finish line");
+            int collectedCollectible = 0;
+            foreach (Transform t in collectibles.transform)
+            {
+                if (t.gameObject.tag == "Collectible")
+                {
+                    collectedCollectible += 1;
+                }
+            }
+            collectedCollectible = totalCollectible - collectedCollectible;
+            instantiateText("You have collected "+collectedCollectible+"/"+ totalCollectible+" collectibles in this level", 48, new Vector3(0,0,0),new Vector2(1000, 100));
             //victory code
         }
     }
@@ -243,22 +277,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
             {
-                GameObject textGO = new GameObject();
-                textGO.transform.parent = canvas.transform;
-                textGO.AddComponent<Text>();
-
-                // Set Text component properties.
-                Text warning = textGO.GetComponent<Text>();
-                warning.text = "You cannot respawn in the portal";
-                warning.font = arial;
-                warning.fontSize = 48;
-                warning.alignment = TextAnchor.LowerCenter;
-
-                RectTransform rectTransform;
-                rectTransform = warning.GetComponent<RectTransform>();
-                rectTransform.localPosition = new Vector3(0, -Screen.width/4, 0);
-                rectTransform.sizeDelta = new Vector2(1000, 100);
-
+                GameObject textGO = instantiateText("You cannot respawn in the portal", 48, new Vector3(0, -Screen.width / 4, 0), new Vector2(1000, 100));
                 Destroy(textGO, 3.0f);
             }
             else 

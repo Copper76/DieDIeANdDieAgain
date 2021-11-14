@@ -3204,6 +3204,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 31441984}
     - target: {fileID: 5565483698334585391, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
+      propertyPath: nextSceneName
+      value: Level1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565483698334585391, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
       propertyPath: respawnPoint.x
       value: -2.5
       objectReference: {fileID: 0}

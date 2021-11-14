@@ -27,7 +27,6 @@ public class PortalController : MonoBehaviour
         {
             Debug.Log("you've reached the finish line");
             //victory code
-            
             StartCoroutine(NextLevel());
             asyncLoad.allowSceneActivation = true;
         }
@@ -35,6 +34,7 @@ public class PortalController : MonoBehaviour
 
     IEnumerator NextLevel()
     {
+        yield return new WaitForSeconds(3);
         nextScene = SceneManager.GetSceneByName(nextSceneName);
         
         asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
