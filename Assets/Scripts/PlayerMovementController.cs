@@ -29,8 +29,9 @@ public class PlayerMovementController : MonoBehaviour
     private float horizontal;
     private float vertical;
     private int scoreNum;
-
-    public bool isGrounded;
+    private GameObject canvas;
+    private Font arial;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +48,16 @@ public class PlayerMovementController : MonoBehaviour
         updateLife();
         updateCollectibles();
         scoreNum = 0;
+        canvas = GameObject.Find("Canvas");
 
         audioSource = GetComponent<AudioSource>();
+        arial = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+
+        //initiate all collectibles
+        foreach (Transform t in collectibles.transform)
+        {
+            t.gameObject.SetActive(true);
+        }
     }
 
     void updateLife()
@@ -65,13 +74,9 @@ public class PlayerMovementController : MonoBehaviour
     {
         foreach (Transform t in collectibles.transform)
         {
-            if (t.gameObject.GetComponent<CollectibleMovement>().life <= lives)
+            if (t.gameObject.GetComponent<CollectibleMovement>().life > lives)
             {
-                t.gameObject.SetActive(true);
-            }
-            else
-            {
-                t.gameObject.SetActive(true);
+                Destroy(t.gameObject);
             }
         }
     }
@@ -89,7 +94,8 @@ public class PlayerMovementController : MonoBehaviour
         audioSource.PlayOneShot(sfxClips[0]);
         // if (lives > 0)
         // {
-        var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
+        //var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
+        var trialRespawnPos = respawnPoint - this.transform.position;
         /*
         
         bool isCurrentlyColliding = false;
@@ -109,7 +115,7 @@ public class PlayerMovementController : MonoBehaviour
             }
         }while(!isCurrentlyColliding);
         */
-            this.transform.Translate(trialRespawnPos);
+        this.transform.Translate(trialRespawnPos);
             this.rb.velocity = new Vector2(0f,0f);
             lives -= 1;
             updateLife();
@@ -140,6 +146,19 @@ public class PlayerMovementController : MonoBehaviour
             audioSource.PlayOneShot(sfxClips[1]);
         }
 
+        if (other.gameObject.tag == "Extralife")
+        {
+            Destroy(other.gameObject);
+            lives += 1;
+            updateLife();
+            audioSource.PlayOneShot(sfxClips[1]);
+        }
+
+        if (other.gameObject.tag == "Tutorial")
+        {
+            other.gameObject.GetComponent<PopUp>().show();
+        }
+
         if (other.gameObject.layer == 6)
         {
             die();
@@ -152,18 +171,14 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    //used this for isgorunded
-    /**
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("entered Collision");
-        Debug.Log(other.otherCollider);
-        if (other.gameObject.layer == 3 && other.otherCollider == ec)
+        if (other.gameObject.tag == "Tutorial")
         {
-            isGrounded = true;
+            other.gameObject.GetComponent<PopUp>().hide();
         }
     }
-    **/
+
     // Update is called once per frame
     void Update()
     {
@@ -212,7 +227,6 @@ public class PlayerMovementController : MonoBehaviour
         //if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
         if (colliders != null)
         {
-            Debug.Log("touching");
             isGrounded = true;
         }
 
@@ -227,16 +241,36 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy)
         {
-            respawn();
+            if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
+            {
+                GameObject textGO = new GameObject();
+                textGO.transform.parent = canvas.transform;
+                textGO.AddComponent<Text>();
+
+                // Set Text component properties.
+                Text warning = textGO.GetComponent<Text>();
+                warning.text = "You cannot respawn in the portal";
+                warning.font = arial;
+                warning.fontSize = 48;
+                warning.alignment = TextAnchor.LowerCenter;
+
+                RectTransform rectTransform;
+                rectTransform = warning.GetComponent<RectTransform>();
+                rectTransform.localPosition = new Vector3(0, -Screen.width/4, 0);
+                rectTransform.sizeDelta = new Vector2(1000, 100);
+
+                Destroy(textGO, 3.0f);
+            }
+            else 
+            {
+                respawn();
+            }
         }
 
         if (Keyboard.current.mKey.wasPressedThisFrame && lives > 0)
         {
             map.SetActive(!map.activeInHierarchy);
         }
-
-        // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(0, colliderRadius, 0), isGrounded ? Color.green : Color.red);
-        // Debug.DrawLine(groundCheckPos, groundCheckPos - new Vector3(colliderRadius, 0, 0), isGrounded ? Color.green : Color.red);
     }
 
     void LateUpdate()
