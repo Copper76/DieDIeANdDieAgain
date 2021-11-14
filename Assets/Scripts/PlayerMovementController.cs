@@ -270,6 +270,7 @@ public class PlayerMovementController : MonoBehaviour
         if (Keyboard.current.mKey.wasPressedThisFrame && lives > 0)
         {
             map.SetActive(!map.activeInHierarchy);
+            canvas.SetActive(!map.activeInHierarchy);
         }
     }
 
