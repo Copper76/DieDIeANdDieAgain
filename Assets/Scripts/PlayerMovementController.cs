@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class PlayerMovementController : MonoBehaviour
     public Vector3 respawnPoint;
     public int lives;
     public Text score;
+    public TextMeshProUGUI scoreTMP;
     public Text life;
+    public TextMeshProUGUI lifeTMP;
     public GameObject collectibles;
     public GameObject leftuplight;
     public GameObject rightuplight;
@@ -47,6 +50,7 @@ public class PlayerMovementController : MonoBehaviour
         vertical = 0.0f;
         isGrounded = false;
         score.text = "Score:0";
+        scoreTMP.text = "Score:0";
         updateLife();
         scoreNum = 0;
         totalCollectible = 0;
@@ -73,7 +77,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             text += "\u2610";//It's a square!!!
         }
-        life.text = text;
+        lifeTMP.text = text;
     }
 
     void updateCollectibles()
@@ -92,6 +96,7 @@ public class PlayerMovementController : MonoBehaviour
         GameObject textGO = new GameObject();
         textGO.transform.parent = canvas.transform;
         textGO.AddComponent<Text>();
+        textGO.AddComponent<TextMeshProUGUI>();
 
         // Set Text component properties.
         Text text = textGO.GetComponent<Text>();
@@ -166,7 +171,7 @@ public class PlayerMovementController : MonoBehaviour
         { 
             Destroy(other.gameObject);
             scoreNum += 100;
-            score.text = "Score:"+scoreNum;
+            scoreTMP.text = "Score:"+scoreNum;
             audioSource.PlayOneShot(sfxClips[1]);
         }
 

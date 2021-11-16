@@ -7,10 +7,8 @@ public class PortalController : MonoBehaviour
 {
     public AudioSource bgm;
     public string nextSceneName;
-    private Scene nextScene;
 
     private AsyncOperation asyncLoad;
-    private AsyncOperation asyncUnload;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +33,7 @@ public class PortalController : MonoBehaviour
     IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(3);
-        nextScene = SceneManager.GetSceneByName(nextSceneName);
-        
+
         asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
 
         while (asyncLoad.progress < 0.9f)
