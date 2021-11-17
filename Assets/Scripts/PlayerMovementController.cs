@@ -35,6 +35,7 @@ public class PlayerMovementController : MonoBehaviour
     private bool isGrounded;
     private int totalCollectible;
     private RectTransform rectTransform;
+    private bool levelFinished;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,7 @@ public class PlayerMovementController : MonoBehaviour
         scoreNum = 0;
         totalCollectible = 0;
         canvas = GameObject.Find("Canvas");
+        levelFinished = false;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -62,6 +64,10 @@ public class PlayerMovementController : MonoBehaviour
             if (t.gameObject.tag == "Collectible")
             {
                 totalCollectible += 1;
+            }
+            if (t.gameObject.layer == 7)//7 is respawn layer
+            {
+                respawnPoint = t.gameObject.transform.position + (new Vector3(0,0,-0.1f));
             }
         }
     }
@@ -80,9 +86,16 @@ public class PlayerMovementController : MonoBehaviour
     {
         foreach (Transform t in collectibles.transform)
         {
-            if (t.gameObject.GetComponent<CollectibleMovement>().life > lives)
+            if (t.gameObject.tag == "Collectible" || t.gameObject.tag == "Extralife")
             {
-                Destroy(t.gameObject);
+                if (t.gameObject.GetComponent<CollectibleMovement>().start == lives)
+                {
+                    t.gameObject.SetActive(true);
+                }
+                if (t.gameObject.GetComponent<CollectibleMovement>().end == lives)
+                {
+                    Destroy(t.gameObject);
+                }
             }
         }
     }
@@ -123,8 +136,8 @@ public class PlayerMovementController : MonoBehaviour
     void die()
     {
         audioSource.PlayOneShot(sfxClips[0]);
-        // if (lives > 0)
-        // {
+        if (lives > 0)
+        {
         //var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
         var trialRespawnPos = respawnPoint - this.transform.position;
         /*
@@ -151,11 +164,12 @@ public class PlayerMovementController : MonoBehaviour
         lives -= 1;
         updateLife();
         updateCollectibles();
-        // }
-        // else
-        // {
-        //     //game lost code
-        // }
+        }
+        else
+        {
+            levelFinished = true;
+            //give menu
+        }
     }
 
     //put a dummy then die, applicable to anything other than falling
@@ -198,6 +212,7 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             Debug.Log("you've reached the finish line");
+            levelFinished = true;
             int collectedCollectible = 0;
             foreach (Transform t in collectibles.transform)
             {
@@ -233,7 +248,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!map.activeInHierarchy)
+        if (!map.activeInHierarchy && !levelFinished)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -265,7 +280,6 @@ public class PlayerMovementController : MonoBehaviour
         //check player is grounded (not used atm)
         Collider2D colliders = Physics2D.OverlapBox(groundCheckPos, new Vector3(colliderBounds.size.x * 0.9f, 0.1f, 0f), 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
-        //if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
         if (colliders != null)
         {
             isGrounded = true;
@@ -273,14 +287,14 @@ public class PlayerMovementController : MonoBehaviour
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy && !levelFinished)
         {
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
         }
 
-        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy)
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy && !levelFinished)
         {
             if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
             {
@@ -293,16 +307,11 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.mKey.wasPressedThisFrame && lives > 0)
+        if (Keyboard.current.mKey.wasPressedThisFrame && !levelFinished)
         {
             map.SetActive(!map.activeInHierarchy);
             canvas.SetActive(!map.activeInHierarchy);
         }
-    }
-
-    void LateUpdate()
-    {
-
     }
 
     public void Move(InputAction.CallbackContext context)
