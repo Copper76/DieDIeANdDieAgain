@@ -1319,7 +1319,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Space to Jump
+  m_text: '"Jump, and you will find out how to unfold your wings as you fall"
+
+    --
+    Ray Bradbury
+
+
+    Press Space to Jump'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: 0}
