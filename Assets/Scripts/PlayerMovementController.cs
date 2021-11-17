@@ -27,15 +27,17 @@ public class PlayerMovementController : MonoBehaviour
     public AudioSource audioSource;
     public List<AudioClip> sfxClips;
     public GameObject map;
+    public GameObject ui;
+    public GameObject menu;
+    public GameObject tutorialText;
 
     private float horizontal;
     private float vertical;
     private int scoreNum;
-    private GameObject canvas;
     private bool isGrounded;
     private int totalCollectible;
     private RectTransform rectTransform;
-    private bool levelFinished;
+    private bool disableControl;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +54,7 @@ public class PlayerMovementController : MonoBehaviour
         updateLife();
         scoreNum = 0;
         totalCollectible = 0;
-        canvas = GameObject.Find("Canvas");
-        levelFinished = false;
+        disableControl = false;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -103,7 +104,7 @@ public class PlayerMovementController : MonoBehaviour
     GameObject instantiateText(string message, int fontSize, Vector3 localPos, Vector2 size)
     {
         GameObject textGO = new GameObject();
-        textGO.transform.parent = canvas.transform;
+        textGO.transform.parent = tutorialText.transform.parent;//find the right hierarchy
         // textGO.AddComponent<Text>();
         textGO.AddComponent<TextMeshProUGUI>();
 
@@ -167,7 +168,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            levelFinished = true;
+            disableControl = true;
             //give menu
         }
     }
@@ -212,7 +213,7 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             Debug.Log("you've reached the finish line");
-            levelFinished = true;
+            disableControl = true;
             int collectedCollectible = 0;
             foreach (Transform t in collectibles.transform)
             {
@@ -248,7 +249,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!map.activeInHierarchy && !levelFinished)
+        if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -287,14 +288,14 @@ public class PlayerMovementController : MonoBehaviour
 
         //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy && !levelFinished)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
             Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
         }
 
-        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy && !levelFinished)
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
             if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
             {
@@ -307,10 +308,17 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.mKey.wasPressedThisFrame && !levelFinished)
+        if (Keyboard.current.mKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
         {
             map.SetActive(!map.activeInHierarchy);
-            canvas.SetActive(!map.activeInHierarchy);
+            ui.SetActive(!map.activeInHierarchy);
+            tutorialText.SetActive(!map.activeInHierarchy);
+        }
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            menu.SetActive(!menu.activeInHierarchy);
+            tutorialText.SetActive(!menu.activeInHierarchy);
         }
     }
 
