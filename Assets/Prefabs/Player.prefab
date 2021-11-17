@@ -80,7 +80,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -173,7 +173,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -266,7 +266,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -550,8 +550,9 @@ MonoBehaviour:
   maxJumpHeight: 12
   respawnPoint: {x: 0, y: 0, z: 0}
   lives: 3
-  score: {fileID: 0}
-  life: {fileID: 0}
+  teletactile: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
+  scoreTMP: {fileID: 0}
+  lifeTMP: {fileID: 0}
   collectibles: {fileID: 0}
   leftuplight: {fileID: 5565483698227787740}
   rightuplight: {fileID: 5565483698776763224}
@@ -564,7 +565,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a7c3018585928da4c906be55efcf3b3a, type: 3}
   - {fileID: 8300000, guid: 478ba564f90c2614cb90debb17cffaf7, type: 3}
   map: {fileID: 0}
-  isGrounded: 0
+  ui: {fileID: 0}
+  menu: {fileID: 0}
+  tutorialText: {fileID: 0}
 --- !u!114 &5565483698334585390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +852,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
