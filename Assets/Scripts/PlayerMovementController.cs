@@ -16,9 +16,8 @@ public class PlayerMovementController : MonoBehaviour
     public float maxJumpHeight;
     public Vector3 respawnPoint;
     public int lives;
-    public Text score;
+    public TMP_FontAsset teletactile;
     public TextMeshProUGUI scoreTMP;
-    public Text life;
     public TextMeshProUGUI lifeTMP;
     public GameObject collectibles;
     public GameObject leftuplight;
@@ -33,7 +32,6 @@ public class PlayerMovementController : MonoBehaviour
     private float vertical;
     private int scoreNum;
     private GameObject canvas;
-    private Font arial;
     private bool isGrounded;
     private int totalCollectible;
     private RectTransform rectTransform;
@@ -49,7 +47,6 @@ public class PlayerMovementController : MonoBehaviour
         horizontal = 0.0f;
         vertical = 0.0f;
         isGrounded = false;
-        score.text = "Score:0";
         scoreTMP.text = "Score:0";
         updateLife();
         scoreNum = 0;
@@ -57,7 +54,6 @@ public class PlayerMovementController : MonoBehaviour
         canvas = GameObject.Find("Canvas");
 
         audioSource = GetComponent<AudioSource>();
-        arial = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
 
         //initiate all collectibles
         foreach (Transform t in collectibles.transform)
@@ -75,7 +71,7 @@ public class PlayerMovementController : MonoBehaviour
         string text = "Life=";
         for (int i = 0; i < lives; i++)
         {
-            text += "\u2610";//It's a square!!!
+            text += "[]";//It's a square!!!
         }
         lifeTMP.text = text;
     }
@@ -95,16 +91,22 @@ public class PlayerMovementController : MonoBehaviour
     {
         GameObject textGO = new GameObject();
         textGO.transform.parent = canvas.transform;
-        textGO.AddComponent<Text>();
+        // textGO.AddComponent<Text>();
         textGO.AddComponent<TextMeshProUGUI>();
 
         // Set Text component properties.
+        /*
         Text text = textGO.GetComponent<Text>();
         text.text = message;
         text.font = arial;
         text.fontSize = fontSize;
+        */
+        TextMeshProUGUI textTMP = textGO.GetComponent<TextMeshProUGUI>();
+        textTMP.text = message;
+        textTMP.font = teletactile;
+        textTMP.fontSize = fontSize;
 
-        rectTransform = text.GetComponent<RectTransform>();
+        rectTransform = textTMP.GetComponent<RectTransform>();
         rectTransform.localPosition = localPos;
         rectTransform.sizeDelta = size;
         return textGO;
@@ -145,10 +147,10 @@ public class PlayerMovementController : MonoBehaviour
         }while(!isCurrentlyColliding);
         */
         this.transform.Translate(trialRespawnPos);
-            this.rb.velocity = new Vector2(0f,0f);
-            lives -= 1;
-            updateLife();
-            updateCollectibles();
+        this.rb.velocity = new Vector2(0f, 0f);
+        lives -= 1;
+        updateLife();
+        updateCollectibles();
         // }
         // else
         // {
@@ -168,10 +170,10 @@ public class PlayerMovementController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Collectible")
-        { 
+        {
             Destroy(other.gameObject);
             scoreNum += 100;
-            scoreTMP.text = "Score:"+scoreNum;
+            scoreTMP.text = "Score:" + scoreNum;
             audioSource.PlayOneShot(sfxClips[1]);
         }
 
@@ -205,7 +207,7 @@ public class PlayerMovementController : MonoBehaviour
                 }
             }
             collectedCollectible = totalCollectible - collectedCollectible;
-            instantiateText("You have collected "+collectedCollectible+"/"+ totalCollectible+" collectibles in this level", 48, new Vector3(0,0,0),new Vector2(1000, 100));
+            instantiateText("You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
             //victory code
         }
     }
@@ -231,7 +233,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!map.activeInHierarchy) 
+        if (!map.activeInHierarchy)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -261,7 +263,7 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, 0f, 0f);
 
         //check player is grounded (not used atm)
-        Collider2D colliders = Physics2D.OverlapBox(groundCheckPos, new Vector3(colliderBounds.size.x*0.9f,0.1f,0f), 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
+        Collider2D colliders = Physics2D.OverlapBox(groundCheckPos, new Vector3(colliderBounds.size.x * 0.9f, 0.1f, 0f), 0.0f, LayerMask.GetMask("Ground"));//3 is set to ground
         //check if player main collider is in the list of overlapping colliders
         //if (bc.IsTouchingLayers(LayerMask.GetMask("Ground")))
         if (colliders != null)
@@ -285,7 +287,7 @@ public class PlayerMovementController : MonoBehaviour
                 GameObject textGO = instantiateText("You cannot respawn in the portal", 48, new Vector3(0, -Screen.width / 4, 0), new Vector2(1000, 100));
                 Destroy(textGO, 3.0f);
             }
-            else 
+            else
             {
                 respawn();
             }
@@ -300,7 +302,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void LateUpdate()
     {
-        
+
     }
 
     public void Move(InputAction.CallbackContext context)
