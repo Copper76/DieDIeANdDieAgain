@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Teletactile-3zavL
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1984545957
   material: {fileID: -7243820387340907717}
-  materialHashCode: 0
+  materialHashCode: 527239269
   m_Version: 1.1.0
   m_SourceFontFileGUID: 538ec31a7e75b9c48b5666e32561f5cc
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 538ec31a7e75b9c48b5666e32561f5cc, type: 3}
