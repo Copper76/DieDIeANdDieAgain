@@ -321,7 +321,7 @@ public class PlayerMovementController : MonoBehaviour
             tutorialText.SetActive(!menu.activeInHierarchy);
         }
 
-        if (map.activeInHierarchy)
+        if (map.activeInHierarchy && !disableControl)
         {
             map.transform.position = new Vector3(map.transform.position.x + (horizontal), map.transform.position.y + (vertical), map.transform.position.z);
         }
