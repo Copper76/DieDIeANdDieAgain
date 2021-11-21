@@ -1334,9 +1334,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u201CIf I have seen further it is by standing\n on the shoulders of Giants\u201D.
-    \n--Issac Newton\n\nPress M to view the whole level map.\nYou can look around
-    with WASD or Arrow Keys."
+  m_text: "\u201CI don't know where I'm going from here,\nbut I promise it won't
+    be boring.\u201D \n--David Bowie\n\nPress M to view the whole level map.\nYou
+    can look around with WASD or Arrow Keys."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: -7243820387340907717, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
