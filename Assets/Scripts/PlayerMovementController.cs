@@ -320,11 +320,17 @@ public class PlayerMovementController : MonoBehaviour
             menu.SetActive(!menu.activeInHierarchy);
             tutorialText.SetActive(!menu.activeInHierarchy);
         }
+
+        if (map.activeInHierarchy)
+        {
+            map.transform.position = new Vector3(map.transform.position.x + (horizontal), map.transform.position.y + (vertical), map.transform.position.z);
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
+        vertical = context.ReadValue<Vector2>().y;
     }
 
     public void Jump(InputAction.CallbackContext context)

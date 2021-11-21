@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 136313824}
   - component: {fileID: 136313823}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: MapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
+  m_fontSizeMin: 16
   m_fontSizeMax: 160
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -1748,7 +1748,7 @@ MonoBehaviour:
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 32
+  m_fontSizeMin: 16
   m_fontSizeMax: 160
   m_fontStyle: 0
   m_HorizontalAlignment: 1
