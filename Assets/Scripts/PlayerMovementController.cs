@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerMovementController : MonoBehaviour
@@ -30,6 +31,7 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject ui;
     public GameObject menu;
     public GameObject tutorialText;
+    public TextMeshProUGUI finalText;
 
     private float horizontal;
     private float vertical;
@@ -38,6 +40,7 @@ public class PlayerMovementController : MonoBehaviour
     private int totalCollectible;
     private RectTransform rectTransform;
     private bool disableControl;
+    private AsyncOperation asyncLoad;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +73,19 @@ public class PlayerMovementController : MonoBehaviour
             {
                 respawnPoint = t.gameObject.transform.position + (new Vector3(0,0,-0.1f));
             }
+        }
+    }
+
+    IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(3);
+
+        asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+
+        while (asyncLoad.progress < 0.9f)
+        {
+            Debug.Log("Loading scene " + " [][] Progress: " + asyncLoad.progress);
+            yield return null;
         }
     }
 
@@ -139,27 +155,7 @@ public class PlayerMovementController : MonoBehaviour
         audioSource.PlayOneShot(sfxClips[0]);
         if (lives > 0)
         {
-        //var trialRespawnPos = this.transform.position + respawnPoint - this.transform.position + new Vector3(0, sr.bounds.size.y);
         var trialRespawnPos = respawnPoint - this.transform.position;
-        /*
-        
-        bool isCurrentlyColliding = false;
-        do
-        {
-            
-            List<Collider2D> colliders = new List<Collider2D>();
-            rb.GetAttachedColliders(colliders);
-            foreach (Collider2D collider in colliders)
-            {
-                Vector3 closest = collider.ClosestPoint(trialRespawnPos);
-                if (closest == trialRespawnPos) // the closest point is equal to the point within the bounds, if already inside
-                {
-                    isCurrentlyColliding = true;
-                    trialRespawnPos.y = Mathf.Max(closest.y + sr.bounds.size.y, trialRespawnPos.y); // set it to the highest point not currently overlapping a collider
-                }
-            }
-        }while(!isCurrentlyColliding);
-        */
         this.transform.Translate(trialRespawnPos);
         this.rb.velocity = new Vector2(0f, 0f);
         lives -= 1;
@@ -169,7 +165,13 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             disableControl = true;
-            //give menu
+            var trialRespawnPos = respawnPoint - this.transform.position;
+            this.transform.Translate(trialRespawnPos);
+            this.rb.velocity = new Vector2(0f, 0f);
+            finalText.text = "You have failed to accomplish the trial, the experiment will restart in 3 seconds.";
+            //instantiateText("You have failed to accomplish the trial, the experiment will restart in 3 seconds.", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
+            StartCoroutine(RestartLevel());
+            asyncLoad.allowSceneActivation = true;
         }
     }
 
@@ -213,6 +215,7 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             rb.velocity = new Vector2(0,0);
+            this.transform.Translate(other.gameObject.transform.position - this.transform.position + (new Vector3(0, 0, -0.1f)));
             disableControl = true;
             int collectedCollectible = 0;
             foreach (Transform t in collectibles.transform)
@@ -223,8 +226,8 @@ public class PlayerMovementController : MonoBehaviour
                 }
             }
             collectedCollectible = totalCollectible - collectedCollectible;
-            instantiateText("You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
-            //victory code
+            finalText.text = "You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level";
+            //instantiateText("You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
         }
         /**
         if (other.gameObject.layer == 8)
