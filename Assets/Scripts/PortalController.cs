@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour
 {
+    public AudioSource bgm;
     public string nextSceneName;
-    private Scene nextScene;
+
+    private AsyncOperation asyncLoad;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -26,22 +26,20 @@ public class PortalController : MonoBehaviour
             Debug.Log("you've reached the finish line");
             //victory code
             StartCoroutine(NextLevel());
-            SceneManager.SetActiveScene(nextScene);
+            asyncLoad.allowSceneActivation = true;
         }
     }
 
-
-
-
     IEnumerator NextLevel()
     {
-        nextScene = SceneManager.GetSceneByName(nextSceneName);
-        yield return SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
-    }
+        yield return new WaitForSeconds(3);
 
-    private void AsyncLoad_completed(AsyncOperation op)
-    {
-        
-        throw new System.NotImplementedException();
+        asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
+
+        while (asyncLoad.progress < 0.9f)
+        {
+            Debug.Log("Loading scene " + " [][] Progress: " + asyncLoad.progress);
+            yield return null;
+        }
     }
 }
