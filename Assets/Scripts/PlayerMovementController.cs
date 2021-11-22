@@ -308,6 +308,18 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
 
+        if (bc.IsTouchingLayers(LayerMask.GetMask("Lava")) && !disableControl && !menu.activeInHierarchy && !map.activeInHierarchy)
+        {
+            if (lives > 0)
+            {
+                respawn();
+            }
+            else
+            {
+                die();
+            }
+        }
+
         if (Keyboard.current.mKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
         {
             map.SetActive(!map.activeInHierarchy);
