@@ -32,6 +32,7 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject menu;
     public GameObject tutorialText;
     public TextMeshProUGUI finalText;
+    public string nextSceneName;
 
     private float horizontal;
     private float vertical;
@@ -76,11 +77,11 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    IEnumerator RestartLevel()
+    IEnumerator LoadLevel(string nextSceneName)
     {
         yield return new WaitForSeconds(3);
 
-        asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
 
         while (asyncLoad.progress < 0.9f)
         {
@@ -169,8 +170,7 @@ public class PlayerMovementController : MonoBehaviour
             this.transform.Translate(trialRespawnPos);
             this.rb.velocity = new Vector2(0f, 0f);
             finalText.text = "You have failed to accomplish the trial, the experiment will restart in 3 seconds.";
-            //instantiateText("You have failed to accomplish the trial, the experiment will restart in 3 seconds.", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
-            StartCoroutine(RestartLevel());
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().name));
             asyncLoad.allowSceneActivation = true;
         }
     }
@@ -227,7 +227,8 @@ public class PlayerMovementController : MonoBehaviour
             }
             collectedCollectible = totalCollectible - collectedCollectible;
             finalText.text = "You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level";
-            //instantiateText("You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
+            StartCoroutine(LoadLevel(nextSceneName));
+            asyncLoad.allowSceneActivation = true;
         }
         /**
         if (other.gameObject.layer == 8)

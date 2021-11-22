@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 2470728878424517277}
   - component: {fileID: 3774330659530533864}
   - component: {fileID: 4493954904235849592}
-  - component: {fileID: 6569162832233798636}
   m_Layer: 0
   m_Name: portal_red
   m_TagString: Finish
@@ -239,17 +238,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &6569162832233798636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5405639888940034956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceeb37d353245294387ea224e2d9b629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgm: {fileID: 0}
-  nextSceneName: SampleScene
