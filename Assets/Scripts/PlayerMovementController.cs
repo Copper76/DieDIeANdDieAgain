@@ -212,7 +212,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (other.gameObject.tag == "Finish")
         {
-            Debug.Log("you've reached the finish line");
+            rb.velocity = new Vector2(0,0);
             disableControl = true;
             int collectedCollectible = 0;
             foreach (Transform t in collectibles.transform)
@@ -226,6 +226,19 @@ public class PlayerMovementController : MonoBehaviour
             instantiateText("You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level", 48, new Vector3(0, 0, 0), new Vector2(1000, 100));
             //victory code
         }
+        /**
+        if (other.gameObject.layer == 8)
+        {
+            if (lives > 0)
+            {
+                respawn();
+            }
+            else
+            {
+                die();
+            }
+        }
+        **/
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -307,7 +320,7 @@ public class PlayerMovementController : MonoBehaviour
                 respawn();
             }
         }
-
+        
         if (bc.IsTouchingLayers(LayerMask.GetMask("Lava")) && !disableControl && !menu.activeInHierarchy && !map.activeInHierarchy)
         {
             if (lives > 0)
@@ -319,7 +332,7 @@ public class PlayerMovementController : MonoBehaviour
                 die();
             }
         }
-
+    
         if (Keyboard.current.mKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
         {
             map.SetActive(!map.activeInHierarchy);
