@@ -547,7 +547,7 @@ MonoBehaviour:
   corpse: {fileID: 6091177697207690133, guid: acee2f4ab4c084b45bd92ebaea7defcd, type: 3}
   environment: {fileID: 0}
   speed: 10
-  maxJumpHeight: 11
+  maxJumpHeight: 10
   respawnPoint: {x: 0, y: 0, z: 0}
   lives: 3
   teletactile: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
