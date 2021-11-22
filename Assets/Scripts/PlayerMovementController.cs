@@ -49,8 +49,7 @@ public class PlayerMovementController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         sr = GetComponent<SpriteRenderer>();
-        speed = 10.0f;
-        maxJumpHeight = 10.0f;
+        //speed = 10f;
         horizontal = 0.0f;
         vertical = 0.0f;
         isGrounded = false;
@@ -215,7 +214,7 @@ public class PlayerMovementController : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             rb.velocity = new Vector2(0,0);
-            this.transform.Translate(other.gameObject.transform.position - this.transform.position + (new Vector3(0, 0, -0.1f)));
+            this.transform.Translate(other.gameObject.transform.position - this.transform.position + (new Vector3(0, -0.5f, -0.1f)));
             disableControl = true;
             int collectedCollectible = 0;
             foreach (Transform t in collectibles.transform)
@@ -268,6 +267,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
+            //rb.AddForce(new Vector2(horizontal * speed,0));
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
         if (rb.velocity.x > 0)

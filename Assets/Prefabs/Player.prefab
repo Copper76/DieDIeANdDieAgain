@@ -410,7 +410,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
@@ -546,8 +546,8 @@ MonoBehaviour:
   sr: {fileID: 0}
   corpse: {fileID: 6091177697207690133, guid: acee2f4ab4c084b45bd92ebaea7defcd, type: 3}
   environment: {fileID: 0}
-  speed: 6
-  maxJumpHeight: 12
+  speed: 10
+  maxJumpHeight: 11
   respawnPoint: {x: 0, y: 0, z: 0}
   lives: 3
   teletactile: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
@@ -568,6 +568,8 @@ MonoBehaviour:
   ui: {fileID: 0}
   menu: {fileID: 0}
   tutorialText: {fileID: 0}
+  finalText: {fileID: 0}
+  nextSceneName: Level4
 --- !u!114 &5565483698334585390
 MonoBehaviour:
   m_ObjectHideFlags: 0
