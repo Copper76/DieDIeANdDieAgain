@@ -124,13 +124,6 @@ public class PlayerMovementController : MonoBehaviour
         // textGO.AddComponent<Text>();
         textGO.AddComponent<TextMeshProUGUI>();
 
-        // Set Text component properties.
-        /*
-        Text text = textGO.GetComponent<Text>();
-        text.text = message;
-        text.font = arial;
-        text.fontSize = fontSize;
-        */
         TextMeshProUGUI textTMP = textGO.GetComponent<TextMeshProUGUI>();
         textTMP.text = message;
         textTMP.font = teletactile;
@@ -252,17 +245,6 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /* just some debug logging
-        if (rb.velocity.sqrMagnitude <= 0.05 && Keyboard.current.IsPressed())
-        {
-            Debug.LogError(string.Format("Frame {0} : Stuck? vel {1}, drag = {2}, isGrounded = {3}, position = {4}", Time.frameCount, rb.velocity.ToString(), rb.drag, ec.IsTouchingLayers(LayerMask.GetMask("Ground")), gameObject.transform.position.ToString()));
-        }
-        */
-    }
-
     void FixedUpdate()
     {
         if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
@@ -303,11 +285,8 @@ public class PlayerMovementController : MonoBehaviour
             isGrounded = true;
         }
 
-        //Debug.Log(string.Format("Grounded: {0} on frame {1}", isGrounded, Time.frameCount));
-
         if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded && !map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
-            Debug.Log("Jumping");
             rb.velocity = new Vector2(rb.velocity.x, maxJumpHeight);
             isGrounded = false;
         }
@@ -367,7 +346,6 @@ public class PlayerMovementController : MonoBehaviour
         if (isGrounded && !map.activeInHierarchy)
         {
             audioSource.PlayOneShot(sfxClips[2]);
-            Debug.Log(string.Format("Jump action called at {0}", Time.frameCount));
         }
     }
 }
