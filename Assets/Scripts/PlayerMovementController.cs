@@ -89,6 +89,12 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    public void toggleMenu()
+    {
+        menu.SetActive(!menu.activeInHierarchy);
+        tutorialText.SetActive(!menu.activeInHierarchy);
+    }
+
     void updateLife()
     {
         string text = "Life=";
@@ -325,8 +331,7 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            menu.SetActive(!menu.activeInHierarchy);
-            tutorialText.SetActive(!menu.activeInHierarchy);
+            toggleMenu();
         }
 
         if (map.activeInHierarchy && !disableControl)
