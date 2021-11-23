@@ -86,6 +86,17 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    IEnumerator InstaLoadLevel(string nextSceneName)
+    {
+        asyncLoad = SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
+
+        while (asyncLoad.progress < 0.9f)
+        {
+            Debug.Log("Loading scene " + " [][] Progress: " + asyncLoad.progress);
+            yield return null;
+        }
+    }
+
     public void toggleMenu()
     {
         menu.SetActive(!menu.activeInHierarchy);
@@ -334,7 +345,8 @@ public class PlayerMovementController : MonoBehaviour
         if (Keyboard.current.rKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
         {
             Debug.Log("R" + SceneManager.GetActiveScene().name);
-            LoadLevel(SceneManager.GetActiveScene().name);
+            StartCoroutine(InstaLoadLevel(SceneManager.GetActiveScene().name));
+            asyncLoad.allowSceneActivation = true;
         }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)

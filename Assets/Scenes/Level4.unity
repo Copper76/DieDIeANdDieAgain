@@ -6014,7 +6014,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press space to jump
+  m_Text: Press R to restart level
 --- !u!222 &309749049
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7838,7 +7838,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press <- and -> to move
+  m_Text: Press <- and -> to move and space to jump
 --- !u!222 &1487014425
 CanvasRenderer:
   m_ObjectHideFlags: 0
