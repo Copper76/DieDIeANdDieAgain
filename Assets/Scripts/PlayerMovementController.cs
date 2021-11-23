@@ -10,30 +10,29 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public BoxCollider2D bc;
-    public SpriteRenderer sr;
     public GameObject corpse;
     public GameObject environment;
     public float speed;
     public float maxJumpHeight;
-    public Vector3 respawnPoint;
     public int lives;
     public TMP_FontAsset teletactile;
     public TextMeshProUGUI scoreTMP;
     public TextMeshProUGUI lifeTMP;
+    public TextMeshProUGUI finalText;
     public GameObject collectibles;
     public GameObject leftuplight;
     public GameObject rightuplight;
     public GameObject bottomleftlight;
     public GameObject bottomrightlight;
-    public AudioSource audioSource;
     public List<AudioClip> sfxClips;
     public GameObject map;
     public GameObject ui;
     public GameObject menu;
     public GameObject tutorialText;
-    public TextMeshProUGUI finalText;
     public string nextSceneName;
 
+    private Vector3 respawnPoint;
+    private AudioSource audioSource;
     private float horizontal;
     private float vertical;
     private int scoreNum;
@@ -48,7 +47,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
-        sr = GetComponent<SpriteRenderer>();
         //speed = 10f;
         horizontal = 0.0f;
         vertical = 0.0f;
