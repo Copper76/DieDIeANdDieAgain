@@ -58,7 +58,6 @@ public class PlayerMovementController : MonoBehaviour
         scoreNum = 0;
         totalCollectible = 0;
         disableControl = false;
-
         audioSource = GetComponent<AudioSource>();
 
         //initiate all collectibles
@@ -179,6 +178,11 @@ public class PlayerMovementController : MonoBehaviour
         dummy();
         die();
         audioSource.PlayOneShot(sfxClips[3]);
+    }
+
+    void Update()
+    {
+        
     }
 
     //collects the collectibles with this
@@ -327,6 +331,12 @@ public class PlayerMovementController : MonoBehaviour
             map.SetActive(!map.activeInHierarchy);
             ui.SetActive(!map.activeInHierarchy);
             tutorialText.SetActive(!map.activeInHierarchy);
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
+        {
+            Debug.Log("R" + SceneManager.GetActiveScene().name);
+            LoadLevel(SceneManager.GetActiveScene().name);
         }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)

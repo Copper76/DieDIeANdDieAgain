@@ -24,12 +24,6 @@ public class BGM : MonoBehaviour
             _ => 0.2f
         };
         BGMSource.Play();
-
-        //BGMSource.volume;
-        // If you want to revert to old behaviour, change to IEnumerator and v
-        // yield return new WaitForSeconds(BGMSource.clip.length);
-        // BGMSource.clip = clips[Random.Range(0, clips.Count)];
-        //BGMSource.Play();
     }
 
     // Update is called once per frame

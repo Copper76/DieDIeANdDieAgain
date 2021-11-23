@@ -450,10 +450,6 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 44cb1787-421c-445e-a48a-6a5fb0fd3943
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 5c0d58c3-3252-4f07-8099-16f4adc5990d
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -524,6 +520,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e1be4997-42fa-4db8-838f-d586a94a7cfb
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5ca640da-1a66-4290-bf76-fadb78b321fc
+    m_ActionName: Player/Restart[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
