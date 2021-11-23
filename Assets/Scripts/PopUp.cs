@@ -21,7 +21,7 @@ public class PopUp : MonoBehaviour
             rectTransform.anchoredPosition = rectTransform.parent.localPosition;
             
             rectTransform.anchorMin = new Vector2(0, 0);
-            rectTransform.anchorMax = new Vector2(1.6f, 1.6f);
+            rectTransform.anchorMax = new Vector2(1.2f, 1.4f);
             
             rectTransform.sizeDelta = new Vector2(1.0f, 1.0f);
 
@@ -31,7 +31,7 @@ public class PopUp : MonoBehaviour
             
             Image bg = panel.AddComponent<Image>();
             bg.color = new Color32(255, 54, 255, 65);
-            bg.rectTransform.sizeDelta = new Vector2(2.0f, 2.0f);
+            bg.rectTransform.sizeDelta = new Vector2(1.0f, 1.0f);
             panel.layer = LayerMask.NameToLayer("UI");
             bg.maskable = true;
         }
