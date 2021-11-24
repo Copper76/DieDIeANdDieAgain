@@ -49,4 +49,9 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public void toggle(GameObject menu)
+    {
+        menu.SetActive(!menu.activeInHierarchy);
+    }
 }

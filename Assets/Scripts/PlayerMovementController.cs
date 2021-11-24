@@ -271,7 +271,6 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Math.Abs(rb.velocity.x) > limitSpeed)
         {
-            Debug.Log(rb.velocity.x);
             rb.velocity = new Vector2(rb.velocity.x < 0 ? -limitSpeed : limitSpeed, rb.velocity.y);
         }
 
