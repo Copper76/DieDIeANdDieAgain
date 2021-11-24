@@ -1583,8 +1583,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 948121838}
-  xConstOffset: -1
-  yConstOffset: -3
+  xConstOffset: 3
+  yConstOffset: -4
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1612,7 +1612,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
