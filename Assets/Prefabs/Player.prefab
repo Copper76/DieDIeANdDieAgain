@@ -396,7 +396,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.975, y: 0.975}
   m_EdgeRadius: 0
 --- !u!50 &5565483698334585396
 Rigidbody2D:
@@ -410,9 +410,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 7
+  m_LinearDrag: 1
+  m_AngularDrag: 0
   m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -445,50 +445,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 81372fdf-8452-460e-8973-86e138721025
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5c0d58c3-3252-4f07-8099-16f4adc5990d
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 26ecee7f-9a4f-4208-9a9f-be8c8a0171ac
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 14409839-2116-4027-861b-f51c02c3be24
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 087dda53-b576-4184-ad0b-10a70061a9de
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5cb9a65a-958b-421f-b96e-1b9f5ffb7129
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a63bacce-d0be-4c01-8606-28e5ef53a33f
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ae6258f2-dd94-4d8a-a0d2-68751cb69bab
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8c58b65a-392d-40ee-80f4-836d8475fc1b
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: eb720057-d077-4002-bccf-63645b275a79
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 37245bb4-4871-41e2-8b8c-bc24fcc2cce4
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5565483698334585391}
         m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
@@ -520,10 +476,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e1be4997-42fa-4db8-838f-d586a94a7cfb
     m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5ca640da-1a66-4290-bf76-fadb78b321fc
-    m_ActionName: Player/Restart[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -543,22 +495,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5565483698334585396}
   bc: {fileID: 5565483698334585387}
-  sr: {fileID: 0}
   corpse: {fileID: 6091177697207690133, guid: acee2f4ab4c084b45bd92ebaea7defcd, type: 3}
   environment: {fileID: 0}
-  speed: 10
-  maxJumpHeight: 10
-  respawnPoint: {x: 0, y: 0, z: 0}
+  acceleration: 300
+  limitSpeed: 9
+  maxJumpHeight: 11.2
   lives: 3
   teletactile: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   scoreTMP: {fileID: 0}
   lifeTMP: {fileID: 0}
+  finalText: {fileID: 0}
   collectibles: {fileID: 0}
   leftuplight: {fileID: 5565483698227787740}
   rightuplight: {fileID: 5565483698776763224}
   bottomleftlight: {fileID: 5565483698005409758}
   bottomrightlight: {fileID: 1165062659}
-  audioSource: {fileID: 0}
   sfxClips:
   - {fileID: 8300000, guid: 4948c352312f74044a757de089c920ac, type: 3}
   - {fileID: 8300000, guid: 8c80f269bf70709489e7e7b5cb32622c, type: 3}
@@ -568,8 +519,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   menu: {fileID: 0}
   tutorialText: {fileID: 0}
-  finalText: {fileID: 0}
-  nextSceneName: Level4
+  nextSceneName: MainMenu
 --- !u!114 &5565483698334585390
 MonoBehaviour:
   m_ObjectHideFlags: 0

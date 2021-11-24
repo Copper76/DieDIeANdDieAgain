@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System;
 using TMPro;
 
 public class PlayerMovementController : MonoBehaviour
@@ -12,7 +13,8 @@ public class PlayerMovementController : MonoBehaviour
     public BoxCollider2D bc;
     public GameObject corpse;
     public GameObject environment;
-    public float speed;
+    public float acceleration;
+    public float limitSpeed;
     public float maxJumpHeight;
     public int lives;
     public TMP_FontAsset teletactile;
@@ -189,11 +191,6 @@ public class PlayerMovementController : MonoBehaviour
         audioSource.PlayOneShot(sfxClips[3]);
     }
 
-    void Update()
-    {
-        
-    }
-
     //collects the collectibles with this
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -264,21 +261,32 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+    }
+
     void FixedUpdate()
     {
         if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
-            //rb.AddForce(new Vector2(horizontal * speed,0));
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            rb.AddForce(new Vector2(horizontal * acceleration,0));
+            //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
-        if (rb.velocity.x > 0)
+
+        if (Math.Abs(rb.velocity.x) > limitSpeed)
+        {
+            Debug.Log(rb.velocity.x);
+            rb.velocity = new Vector2(rb.velocity.x < 0 ? -limitSpeed : limitSpeed, rb.velocity.y);
+        }
+
+        if (rb.velocity.x > 0.01)
         {
             leftuplight.SetActive(false);
             bottomleftlight.SetActive(!isGrounded);
             rightuplight.SetActive(true);
             bottomrightlight.SetActive(true);
         }
-        else if (rb.velocity.x < 0)
+        else if (rb.velocity.x < -0.01)
         {
             leftuplight.SetActive(true);
             bottomleftlight.SetActive(true);
