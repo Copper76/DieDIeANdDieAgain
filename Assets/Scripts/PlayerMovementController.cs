@@ -55,6 +55,7 @@ public class PlayerMovementController : MonoBehaviour
         isGrounded = false;
         scoreTMP.text = "Score:0";
         updateLife();
+        updateCollectibles();
         scoreNum = 0;
         totalCollectible = 0;
         disableControl = false;
@@ -261,10 +262,6 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-    }
-
     void FixedUpdate()
     {
         if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
@@ -318,16 +315,24 @@ public class PlayerMovementController : MonoBehaviour
             isGrounded = false;
         }
 
-        if (Keyboard.current.ctrlKey.wasPressedThisFrame && lives > 0 && !map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
+        if (Keyboard.current.ctrlKey.wasPressedThisFrame && !map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
-            if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
+            if (lives > 0)
             {
-                GameObject textGO = instantiateText("You cannot respawn in the portal", 48, new Vector3(0, -Screen.width / 4, 0), new Vector2(1000, 100));
-                Destroy(textGO, 3.0f);
+                if (bc.IsTouchingLayers(LayerMask.GetMask("Respawn")))
+                {
+                    GameObject textGO = instantiateText("You cannot respawn in the portal", 48, new Vector3(0, -Screen.width / 4, 0), new Vector2(1000, 100));
+                    Destroy(textGO, 3.0f);
+                }
+                else
+                {
+                    respawn();
+                }
             }
-            else
+            else 
             {
-                respawn();
+                GameObject textGO = instantiateText("You have no more lives to respawn", 48, new Vector3(0, -Screen.width / 4, 0), new Vector2(1000, 100));
+                Destroy(textGO, 3.0f);
             }
         }
         
@@ -352,7 +357,6 @@ public class PlayerMovementController : MonoBehaviour
 
         if (Keyboard.current.rKey.wasPressedThisFrame && !disableControl && !menu.activeInHierarchy)
         {
-            Debug.Log("R" + SceneManager.GetActiveScene().name);
             StartCoroutine(InstaLoadLevel(SceneManager.GetActiveScene().name));
             asyncLoad.allowSceneActivation = true;
         }
