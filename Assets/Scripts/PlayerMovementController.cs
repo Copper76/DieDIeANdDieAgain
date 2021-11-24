@@ -61,10 +61,9 @@ public class PlayerMovementController : MonoBehaviour
         disableControl = false;
         audioSource = GetComponent<AudioSource>();
 
-        //initiate all collectibles
+        //calculate all collectibles
         foreach (Transform t in collectibles.transform)
         {
-            t.gameObject.SetActive(true);
             if (t.gameObject.tag == "Collectible")
             {
                 totalCollectible += 1;
