@@ -2141,7 +2141,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Press Space to Jump\n\n\"Jump, and you will find out how to\n unfold your
-    wings as you fall\"\n-- Ray Bradbury"
+    wings as you fall.\"\n-- Ray Bradbury"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: -7243820387340907717, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}

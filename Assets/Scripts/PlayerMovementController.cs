@@ -234,7 +234,7 @@ public class PlayerMovementController : MonoBehaviour
                 }
             }
             collectedCollectible = totalCollectible - collectedCollectible;
-            finalText.text = "You have collected " + collectedCollectible + "/" + totalCollectible + " collectibles in this level";
+            finalText.text = "You have collected " + collectedCollectible + "/" + totalCollectible + " blue floaties in this level";
             StartCoroutine(LoadLevel(nextSceneName));
             asyncLoad.allowSceneActivation = true;
         }

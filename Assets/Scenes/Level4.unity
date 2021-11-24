@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Touching lava will cost you a life and force you to\nrespawn.\n\n\u201CBuild
+  m_text: "Touching lava will cost you a life and force you to\nrespawn.\n\n\"Build
     a man a fire, and he'll be warm for a day. \nSet a man on fire, and he'll be
     warm for the rest\nof his life.\"\n--Terry Pratchett\n"
   m_isRightToLeft: 0

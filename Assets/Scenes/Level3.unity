@@ -1359,9 +1359,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press M to view the whole level map.\nYou can look around with WASD or
-    Arrow Keys.\n\n\u201CI don't know where I'm going from here,\nbut I promise it
-    won't be boring.\u201D \n--David Bowie\n"
+  m_text: 'Press M to view the whole level map.
+
+    You can look around with WASD
+    or Arrow Keys.
+
+
+    "I don''t know where I''m going from here,
+
+    but I promise
+    it won''t be boring."
+
+    --David Bowie
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: -7243820387340907717, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
@@ -2002,7 +2013,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Falling off platforms will cost you a life,\nand force a respawn at the
-    portal.\n\n\u201CMind the gap.\u201D \n--London Underground"
+    portal.\n\n\"Mind the gap.\" \n--London Underground"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: -7243820387340907717, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
