@@ -8293,7 +8293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931224874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21, y: 7, z: 0}
+  m_LocalPosition: {x: 21, y: 7, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 92574285}
@@ -8558,8 +8558,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.081581175, b: 0.0141509175, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.79215693, g: 0, b: 0, a: 1}
-        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 1}
+        key0: {r: 0.79215693, g: 0, b: 0, a: 0.39215687}
+        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 0.39215687}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -14686,6 +14686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 92574285}
     m_Modifications:
+    - target: {fileID: 25986103661957651, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 25986103661957652, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
       propertyPath: m_Name
       value: LavaParticle
@@ -14704,7 +14708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 25986103661957653, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 25986103661957653, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
       propertyPath: m_LocalRotation.w

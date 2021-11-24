@@ -2100,8 +2100,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press ESC to open and close menu.\n\nWhen in trouble, \nyou can always
-    restart the level in menu.\n--Game Devs of this game"
+  m_text: "Press ESC to open and close menu.\nPress R to restart level.\n\nWhen in
+    trouble, \nyou can always restart the level in menu.\n--Game Devs of this game"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
   m_sharedMaterial: {fileID: -7243820387340907717, guid: 2b97a0997a0fbea4f820e56c710f3ec1, type: 2}
