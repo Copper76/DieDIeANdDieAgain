@@ -1312,8 +1312,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.081581175, b: 0.0141509175, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.79215693, g: 0, b: 0, a: 1}
-        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 1}
+        key0: {r: 0.79215693, g: 0, b: 0, a: 0.5882353}
+        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 0.5882353}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1371,7 +1371,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -8558,8 +8558,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 0.081581175, b: 0.0141509175, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.79215693, g: 0, b: 0, a: 0.39215687}
-        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 0.39215687}
+        key0: {r: 0.79215693, g: 0, b: 0, a: 0.5882353}
+        key1: {r: 0.89019614, g: 0.4901961, b: 0.20392159, a: 0.5882353}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -8617,7 +8617,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -14687,8 +14687,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 92574285}
     m_Modifications:
     - target: {fileID: 25986103661957651, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 25986103661957651, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.1
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 25986103661957651, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 25986103661957651, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.a
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 25986103661957652, guid: 4967712113ec03e46adafc25c3144d5c, type: 3}
       propertyPath: m_Name
