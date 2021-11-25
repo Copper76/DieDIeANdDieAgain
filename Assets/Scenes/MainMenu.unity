@@ -1053,8 +1053,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.010039, y: 0}
-  m_SizeDelta: {x: 1800, y: 800}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1800, y: 1250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1515449773
 MonoBehaviour:
@@ -1093,7 +1093,9 @@ MonoBehaviour:
     \r\nSongs:\r\nMoonlight\r\nRun Under Fire\r\nSummer\r\nVoid Filler\r\nA Journey
     Awaits\r\nAfter The Rain\r\nHard\r\nIt's Come From the Dark\r\nLost In Hyperspace\r\n\r\nMattie
     Pride, https://youtu.be/1bPocvSNn-Q, under Creative Commons Attribution 3.0 -
-    http://bit.ly/RFP_CClicense\r\nSongs:\r\n2D Side Scrolling\r\n"
+    http://bit.ly/RFP_CClicense\r\nSongs:\r\n2D Side Scrolling\r\n\nheaven castro,
+    \r\nhttps://www.fontspace.com/teletactile-font-f44368 \rUnder Freeware\r\nFont:
+    \r\nTeletactile \r\n\n"
 --- !u!222 &1515449774
 CanvasRenderer:
   m_ObjectHideFlags: 0

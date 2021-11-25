@@ -43,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
     private RectTransform rectTransform;
     private bool disableControl;
     private AsyncOperation asyncLoad;
+    private int collectedCollectible;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,7 @@ public class PlayerMovementController : MonoBehaviour
         updateCollectibles();
         scoreNum = 0;
         totalCollectible = 0;
+        collectedCollectible = 0;
         disableControl = false;
         audioSource = GetComponent<AudioSource>();
 
@@ -198,6 +200,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             Destroy(other.gameObject);
             scoreNum += 100;
+            collectedCollectible += 1;
             scoreTMP.text = "Score:" + scoreNum;
             audioSource.PlayOneShot(sfxClips[1]);
         }
@@ -225,15 +228,6 @@ public class PlayerMovementController : MonoBehaviour
             rb.velocity = new Vector2(0,0);
             this.transform.Translate(other.gameObject.transform.position - this.transform.position + (new Vector3(0, -0.5f, -0.1f)));
             disableControl = true;
-            int collectedCollectible = 0;
-            foreach (Transform t in collectibles.transform)
-            {
-                if (t.gameObject.tag == "Collectible")
-                {
-                    collectedCollectible += 1;
-                }
-            }
-            collectedCollectible = totalCollectible - collectedCollectible;
             finalText.text = "You have collected " + collectedCollectible + "/" + totalCollectible + " blue floaties in this level";
             StartCoroutine(LoadLevel(nextSceneName));
             asyncLoad.allowSceneActivation = true;
