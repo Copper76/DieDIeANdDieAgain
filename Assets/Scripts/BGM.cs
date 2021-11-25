@@ -17,9 +17,9 @@ public class BGM : MonoBehaviour
         
         BGMSource.volume = i switch
         {
-            0 => 0.15f,
+            0 => 0.1f,
             5 => 0.1f,
-            2 => 0.15f,
+            2 => 0.1f,
             6 => 0.1f,
             _ => 0.2f
         };
