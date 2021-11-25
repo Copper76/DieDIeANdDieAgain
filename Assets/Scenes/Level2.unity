@@ -3669,6 +3669,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2037682374}
     m_Modifications:
+    - target: {fileID: 7011415833362319605, guid: 3e8b44fc777ba5a488957626f5ae4ad3, type: 3}
+      propertyPath: start
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7460461941760874018, guid: 3e8b44fc777ba5a488957626f5ae4ad3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3716,6 +3720,10 @@ PrefabInstance:
     - target: {fileID: 8490133696372157002, guid: 3e8b44fc777ba5a488957626f5ae4ad3, type: 3}
       propertyPath: m_Name
       value: extralife
+      objectReference: {fileID: 0}
+    - target: {fileID: 8490133696372157002, guid: 3e8b44fc777ba5a488957626f5ae4ad3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e8b44fc777ba5a488957626f5ae4ad3, type: 3}
