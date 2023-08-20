@@ -293,7 +293,6 @@ GameObject:
   - component: {fileID: 5565483698334585396}
   - component: {fileID: 5565483698334585384}
   - component: {fileID: 5565483698334585391}
-  - component: {fileID: 5565483698334585390}
   - component: {fileID: 948121839}
   m_Layer: 0
   m_Name: Player
@@ -414,7 +413,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 292f4b14321fd7046a930e0c35d42db5, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -520,21 +519,6 @@ MonoBehaviour:
   menu: {fileID: 0}
   tutorialText: {fileID: 0}
   nextSceneName: MainMenu
---- !u!114 &5565483698334585390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5565483698334585397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bedf938ae46b4c4aa296e1d59399fc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridLayout: {fileID: 0}
-  playerGridPosition: {x: 0, y: 0, z: 0}
-  playerTransform: {x: 0, y: 0, z: 0}
 --- !u!82 &948121839
 AudioSource:
   m_ObjectHideFlags: 0

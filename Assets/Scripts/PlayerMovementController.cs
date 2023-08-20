@@ -259,8 +259,8 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (!map.activeInHierarchy && !disableControl && !menu.activeInHierarchy)
         {
-            rb.AddForce(new Vector2(horizontal * acceleration,0));
-            //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            //rb.AddForce(new Vector2(horizontal * acceleration,0));
+            rb.velocity = new Vector2(horizontal * acceleration, rb.velocity.y);
         }
 
         if (Math.Abs(rb.velocity.x) > limitSpeed)
@@ -372,7 +372,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (isGrounded && !map.activeInHierarchy)
+        if (isGrounded && !map.activeInHierarchy && !disableControl)
         {
             audioSource.PlayOneShot(sfxClips[2]);
         }

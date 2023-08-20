@@ -4620,6 +4620,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 104494918}
     - target: {fileID: 5565483698334585391, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
+      propertyPath: maxJumpHeight
+      value: 11.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565483698334585391, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
       propertyPath: nextSceneName
       value: Level2
       objectReference: {fileID: 0}
@@ -4628,12 +4632,20 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5565483698334585396, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 292f4b14321fd7046a930e0c35d42db5, type: 2}
+    - target: {fileID: 5565483698334585396, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
       propertyPath: m_LinearDrag
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5565483698334585396, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
       propertyPath: m_AngularDrag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565483698334585396, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5565483698334585397, guid: fd8bf9f70b0529f459fd20427c3dd787, type: 3}
       propertyPath: m_Name
